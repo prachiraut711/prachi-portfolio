@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export const FloatingCTA: React.FC = () => {
   const [visible, setVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,8 +14,20 @@ export const FloatingCTA: React.FC = () => {
         setVisible(false);
       }
     };
+
+    // Detect if a modal has locked body scrolling
+    const observer = new MutationObserver(() => {
+      const modalOpen = document.body.style.overflow === 'hidden';
+      setIsModalOpen(modalOpen);
+    });
+
+    observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const scrollToContact = () => {
@@ -26,15 +39,15 @@ export const FloatingCTA: React.FC = () => {
 
   return (
     <div
-      className={`fixed bottom-6 left-6 z-40 transition-all duration-500 transform ${
-        visible 
+      className={`fixed bottom-4 right-4 sm:bottom-6 sm:left-6 z-40 transition-all duration-300 transform ${
+        visible && !isModalOpen
           ? 'opacity-100 translate-y-0 pointer-events-auto' 
           : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
     >
       <button
         onClick={scrollToContact}
-        className="group flex items-center gap-2 px-4 py-2 rounded-full bg-[#180E2E]/90 hover:bg-[#221340] text-brand-lavender hover:text-white border border-purple-500/30 hover:border-brand-lavender backdrop-blur-xl shadow-[0_8px_30px_rgba(124,58,237,0.35)] transition-all duration-300 hover:scale-105 active:scale-95"
+        className="group flex items-center gap-2 px-4 py-2 rounded-full bg-[#180E2E]/90 hover:bg-[#221340] text-brand-lavender hover:text-white border border-purple-500/30 hover:border-brand-lavender backdrop-blur-xl shadow-[0_8px_30px_rgba(124,58,237,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
         aria-label="Let's Talk - Contact Section"
       >
         <span className="text-brand-lavender text-xs">✦</span>

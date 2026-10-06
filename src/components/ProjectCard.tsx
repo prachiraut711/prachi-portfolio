@@ -19,14 +19,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onSele
     >
       <div className="flex flex-col flex-1">
         {/* Top Header: Index, Domain & Quick Links */}
-        <div className="flex items-center justify-between mb-4 h-8">
-          <div className="flex items-center gap-2.5">
+        <div className="flex items-center justify-between mb-4 min-h-[32px] gap-2">
+          <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap">
             <span className="font-mono text-sm font-bold text-brand-lavender/70">
               #{formattedIndex}
             </span>
             <span className="font-mono text-[11px] px-3 py-0.5 rounded-full bg-purple-500/10 text-brand-lavender border border-purple-500/20">
               {project.domainLabel}
             </span>
+            {project.status && (
+              <span className="inline-flex items-center gap-1.5 font-mono text-[10px] font-medium px-2.5 py-0.5 rounded-full bg-purple-500/15 text-brand-lavender border border-purple-400/30">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-lavender animate-pulse"></span>
+                {project.status}
+              </span>
+            )}
             {project.featured && (
               <span className="hidden sm:inline-flex items-center gap-1 font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-gradient-to-r from-violet-600/30 to-purple-600/30 text-brand-soft border border-purple-400/30">
                 <Sparkles className="w-2.5 h-2.5 text-brand-lavender" />
@@ -129,17 +135,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onSele
         <div className="flex items-center justify-between gap-3 pt-3 border-t border-purple-500/10">
           <button
             onClick={() => onSelect(project)}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-lavender hover:text-white transition-colors group/btn"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-purple-500/15 hover:bg-purple-500/30 text-brand-lavender hover:text-white border border-purple-400/30 hover:border-purple-300/50 text-xs font-mono font-medium cursor-pointer transition-all duration-200 group/btn"
           >
             <span>View Architecture</span>
-            <ArrowUpRight className="w-3 h-3 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+            <ArrowUpRight className="w-3 h-3 text-brand-lavender group-hover/btn:text-white group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
           </button>
 
           <a
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs font-mono text-ink-muted hover:text-[#F5F3FF] transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] hover:bg-white/[0.08] text-xs font-mono text-ink-muted hover:text-[#F5F3FF] border border-purple-500/10 hover:border-purple-500/25 transition-all"
           >
             <GithubIcon className="w-3.5 h-3.5" />
             <span>Repository</span>

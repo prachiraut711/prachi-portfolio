@@ -21,8 +21,10 @@ export const Contact: React.FC = () => {
   };
 
   const handleCopyDraft = () => {
-    if (!name.trim() && !message.trim()) return;
-    const draftText = `To: ${personalInfo.email}\nSubject: Portfolio Contact from ${name.trim() || 'Visitor'}\n\nHi Prachi,\n\n${message.trim()}\n\n---\nFrom: ${name.trim()}\nEmail: ${senderEmail.trim() || 'Not specified'}`;
+    const trimmedName = name.trim();
+    const trimmedEmail = senderEmail.trim();
+    const trimmedMessage = message.trim();
+    const draftText = `To: ${personalInfo.email}\nSubject: Portfolio Contact from ${trimmedName || 'Visitor'}\n\nHello Prachi,\n\n${trimmedMessage || '[Your message here]'}\n\nName: ${trimmedName || '[Your name]'}\nEmail: ${trimmedEmail || 'Not specified'}`;
     navigator.clipboard.writeText(draftText);
     setCopiedDraft(true);
     setTimeout(() => setCopiedDraft(false), 2500);
@@ -37,21 +39,11 @@ export const Contact: React.FC = () => {
     const trimmedMessage = message.trim();
 
     const subject = `Portfolio Contact from ${trimmedName}`;
-    const bodyContent = `Hi Prachi,\n\n${trimmedMessage}\n\n---\nSender Name: ${trimmedName}\nSender Email: ${trimmedEmail || 'Not specified'}`;
+    const bodyContent = `Hello Prachi,\n\n${trimmedMessage}\n\nName: ${trimmedName}\nEmail: ${trimmedEmail || 'Not specified'}`;
 
     const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyContent)}`;
 
-    // Cross-browser reliable mailto dispatch
-    try {
-      const link = document.createElement('a');
-      link.href = mailtoUrl;
-      link.rel = 'noopener noreferrer';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch {
-      window.location.href = mailtoUrl;
-    }
+    window.location.href = mailtoUrl;
 
     setStatusMessage('Opening your email client...');
   };
@@ -242,34 +234,52 @@ export const Contact: React.FC = () => {
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-semibold text-sm transition-all shadow-[0_0_20px_rgba(139,92,246,0.35)] cursor-pointer"
+                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-semibold text-sm transition-all shadow-[0_0_20px_rgba(139,92,246,0.35)] cursor-pointer hover:scale-[1.01]"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Send a Message</span>
+                    <span>Send a Message →</span>
                   </button>
 
-                  {/* Fallback option to copy draft if no mail client configured */}
-                  {(name.trim() || message.trim()) && (
-                    <div className="pt-1 text-center">
-                      <button
-                        type="button"
-                        onClick={handleCopyDraft}
-                        className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-muted hover:text-brand-lavender transition-colors"
-                      >
-                        {copiedDraft ? (
-                          <>
-                            <Check className="w-3.5 h-3.5 text-brand-lavender" />
-                            <span className="text-brand-lavender">Draft Copied to Clipboard!</span>
-                          </>
-                        ) : (
-                          <>
-                            <FileText className="w-3.5 h-3.5" />
-                            <span>Copy message draft text</span>
-                          </>
-                        )}
-                      </button>
-                    </div>
-                  )}
+                  {/* Explicit Quick Action Buttons */}
+                  <div className="flex items-center justify-center gap-3 pt-2">
+                    <button
+                      type="button"
+                      onClick={handleCopyEmail}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-purple-500/20 text-xs font-mono text-ink-secondary hover:text-brand-lavender border border-purple-500/20 transition-all cursor-pointer"
+                      title="Copy Prachi's email to clipboard"
+                    >
+                      {copiedEmail ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-brand-lavender" />
+                          <span className="text-brand-lavender">Email Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5" />
+                          <span>Copy Email</span>
+                        </>
+                      )}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleCopyDraft}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-purple-500/20 text-xs font-mono text-ink-secondary hover:text-brand-lavender border border-purple-500/20 transition-all cursor-pointer"
+                      title="Copy structured message draft to clipboard"
+                    >
+                      {copiedDraft ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-brand-lavender" />
+                          <span className="text-brand-lavender">Draft Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <FileText className="w-3.5 h-3.5" />
+                          <span>Copy Draft</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
 
                   {statusMessage && (
                     <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-brand-lavender text-center font-mono">

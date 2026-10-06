@@ -71,8 +71,8 @@ export const Projects: React.FC = () => {
           </div>
         </div>
 
-        {/* Consistent 3-Column Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 items-stretch">
+        {/* 2-Column Project Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 items-stretch">
           {filteredProjects.map((project, idx) => (
             <div key={project.id} className="h-full">
               <ProjectCard

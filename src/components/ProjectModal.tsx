@@ -47,11 +47,17 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           <X className="w-5 h-5" />
         </button>
 
-        {/* Domain Badge */}
-        <div className="flex items-center gap-2.5 mb-3.5">
+        {/* Domain Badge & Status */}
+        <div className="flex items-center flex-wrap gap-2.5 mb-3.5">
           <span className="font-mono text-xs font-semibold px-3 py-1 rounded-full bg-purple-500/15 text-brand-lavender border border-purple-500/25">
             {project.domainLabel}
           </span>
+          {project.status && (
+            <span className="inline-flex items-center gap-1.5 font-mono text-xs font-medium px-3 py-1 rounded-full bg-purple-500/15 text-brand-lavender border border-purple-400/30">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-lavender animate-pulse"></span>
+              {project.status}
+            </span>
+          )}
           {project.featured && (
             <span className="text-xs font-mono px-3 py-1 rounded-full bg-gradient-to-r from-violet-600/30 to-purple-600/30 text-brand-soft border border-purple-400/25">
               Featured Case Study

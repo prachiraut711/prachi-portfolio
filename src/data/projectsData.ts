@@ -17,6 +17,7 @@ export interface Project {
   videoDemoUrl?: string;
   docsUrl?: string;
   featured: boolean;
+  status?: 'In Progress';
   visualType: 'telemetry' | 'data-quality' | 'support-ai' | 'dev-analytics' | 'finance-ai' | 'yolo-vision' | 'chat-app' | 'task-tracker' | 'event-booking';
 }
 
@@ -68,7 +69,9 @@ export const projectsData: Project[] = [
     ],
     techStack: ['FastAPI', 'Python', 'React 19', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Docker', 'GitHub Actions'],
     githubUrl: 'https://github.com/prachiraut711/devpulse-ai',
+    liveDemoUrl: 'https://devpulse-ai-frontend.onrender.com',
     featured: false,
+    status: 'In Progress',
     visualType: 'dev-analytics'
   },
   {
