@@ -70,7 +70,7 @@ export const projectsData: Project[] = [
     techStack: ['React', 'Node.js', 'Express.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Google Gemini AI', 'Tailwind CSS', 'JWT'],
     githubUrl: 'https://github.com/prachiraut711/SmartSupport-AI',
     liveDemoUrl: 'https://smart-support-ai-two.vercel.app/',
-    featured: false,
+    featured: true,
     visualType: 'support-ai'
   },
   {

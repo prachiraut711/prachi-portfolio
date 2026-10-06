@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { personalInfo } from '../data/portfolioData';
+import { GithubIcon, LinkedinIcon } from './Icons';
 import { 
   Mail, Code2, Copy, Check, 
-  ArrowUpRight, Send, MessageSquare 
+  ArrowUpRight, Send, Sparkles 
 } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from './Icons';
 
 export const Contact: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -23,196 +23,205 @@ export const Contact: React.FC = () => {
     e.preventDefault();
     if (!name.trim() || !message.trim()) return;
 
-    // Compose mailto URI
-    const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+    const subject = encodeURIComponent(`Inquiry from ${name}`);
     const body = encodeURIComponent(
-      `Hello Prachi,\n\n${message}\n\nFrom: ${name} (${senderEmail || 'Not provided'})`
+      `Hello Prachi,\n\n${message}\n\nFrom: ${name} (${senderEmail || 'Not specified'})`
     );
     window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
     setSentStatus('Redirected to your email client to send!');
   };
 
   return (
-    <section id="contact" className="py-24 sm:py-36 relative scroll-mt-20 border-t border-white/[0.04]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-24 sm:py-36 relative scroll-mt-20">
+      
+      {/* Background Climax Ambient Glows */}
+      <div className="glow-orb w-[700px] h-[700px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-purple/15"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
         
-        {/* Section Pill */}
-        <div className="flex items-center gap-2 mb-3">
-          <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span className="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold">
-            06 / Let's Connect
-          </span>
-        </div>
-
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        {/* Large Purple Gradient Climax Panel */}
+        <div className="p-8 sm:p-14 lg:p-16 rounded-4xl bg-gradient-to-br from-[#1F123D]/95 via-[#160D2C]/90 to-[#10091F]/95 border border-purple-500/30 shadow-[0_25px_100px_rgba(124,58,237,0.3)] backdrop-blur-2xl">
           
-          {/* Left Column: Big Headline & Info */}
-          <div className="lg:col-span-6 space-y-6">
-            <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
-              Have an idea? <br />
-              <span className="text-gradient-emerald">Let's build it.</span>
-            </h2>
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* Left Column: Big Vision Headline */}
+            <div className="lg:col-span-6 space-y-6">
+              
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/15 border border-purple-500/25 text-brand-lavender text-xs font-mono">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Open for Engineering Roles</span>
+              </div>
 
-            <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-lg">
-              Whether it's a product, an engineering challenge, or an opportunity to collaborate, I'd love to hear from you.
-            </p>
+              <h2 className="text-4xl sm:text-6xl font-display font-extrabold tracking-tight text-[#F5F3FF] leading-[1.08]">
+                Let's make something <br />
+                <span className="text-gradient-vibrant">worth shipping.</span>
+              </h2>
 
-            {/* Direct Email Card with copy action */}
-            <div className="p-5 rounded-2xl bg-[#0e1118]/90 border border-white/[0.07] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  <Mail className="w-5 h-5" />
+              <p className="text-base sm:text-lg text-ink-secondary leading-relaxed font-normal max-w-lg">
+                Have an idea, opportunity, or engineering problem? Let's talk.
+              </p>
+
+              {/* Email Direct Action Card */}
+              <div className="p-5 rounded-3xl bg-[#0D0719]/80 border border-purple-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-3 rounded-2xl bg-purple-500/15 text-brand-lavender border border-purple-500/25">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-mono text-ink-muted uppercase block">
+                      Direct Email
+                    </span>
+                    <a
+                      href={`mailto:${personalInfo.email}`}
+                      className="text-sm sm:text-base font-display font-bold text-[#F5F3FF] hover:text-brand-lavender transition-colors"
+                    >
+                      {personalInfo.email}
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-xs font-mono uppercase text-zinc-500 block">Direct Email</span>
-                  <a 
-                    href={`mailto:${personalInfo.email}`}
-                    className="text-sm sm:text-base font-semibold text-zinc-200 hover:text-emerald-400 transition-colors"
+
+                <button
+                  onClick={handleCopyEmail}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/[0.05] hover:bg-purple-500/20 text-xs font-mono text-brand-soft border border-purple-500/20 transition-all self-start sm:self-auto hover:scale-105"
+                  title="Copy email to clipboard"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-brand-lavender" />
+                      <span className="text-brand-lavender">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy Email</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Profiles Row */}
+              <div className="pt-2">
+                <span className="text-xs font-mono text-ink-muted uppercase block mb-3">
+                  Social & Code Platforms
+                </span>
+                <div className="flex flex-wrap gap-2.5">
+                  <a
+                    href={personalInfo.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] hover:bg-purple-500/20 text-ink-primary hover:text-white border border-purple-500/20 text-xs font-mono transition-all hover:scale-105"
                   >
-                    {personalInfo.email}
+                    <LinkedinIcon className="w-3.5 h-3.5 text-brand-lavender" />
+                    <span>LinkedIn</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+                  </a>
+
+                  <a
+                    href={personalInfo.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] hover:bg-purple-500/20 text-ink-primary hover:text-white border border-purple-500/20 text-xs font-mono transition-all hover:scale-105"
+                  >
+                    <GithubIcon className="w-3.5 h-3.5" />
+                    <span>GitHub</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+                  </a>
+
+                  <a
+                    href={personalInfo.leetcode}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] hover:bg-amber-500/15 text-ink-primary hover:text-amber-200 border border-purple-500/20 text-xs font-mono transition-all hover:scale-105"
+                  >
+                    <Code2 className="w-3.5 h-3.5 text-amber-400" />
+                    <span>LeetCode</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
                   </a>
                 </div>
               </div>
 
-              <button
-                onClick={handleCopyEmail}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-mono text-zinc-300 border border-white/5 transition-colors self-start sm:self-auto"
-                title="Copy email to clipboard"
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="text-emerald-400">Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>Copy</span>
-                  </>
-                )}
-              </button>
+              {/* Primary Direct Mail Button */}
+              <div className="pt-4">
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  className="btn-studio-primary px-8 py-4 inline-flex items-center gap-3 text-base shadow-[0_0_35px_rgba(139,92,246,0.45)]"
+                >
+                  <span>Send Direct Email</span>
+                  <ArrowUpRight className="w-5 h-5" />
+                </a>
+              </div>
+
             </div>
 
-            {/* External Links */}
-            <div className="pt-2">
-              <span className="text-xs font-mono uppercase tracking-wider text-zinc-500 block mb-3">
-                Professional Profiles
-              </span>
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href={personalInfo.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.03] hover:bg-emerald-500/10 text-zinc-300 hover:text-emerald-300 border border-white/[0.08] hover:border-emerald-500/30 text-xs font-mono transition-all"
-                >
-                  <LinkedinIcon className="w-4 h-4 text-emerald-400" />
-                  <span>LinkedIn</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
-                </a>
+            {/* Right Column: Send a Message Form */}
+            <div className="lg:col-span-6">
+              <div className="p-6 sm:p-8 rounded-3xl bg-[#120B24]/90 border border-purple-500/25 shadow-xl">
+                <div className="flex items-center gap-2 mb-6 pb-3 border-b border-purple-500/15">
+                  <span className="w-2 h-2 rounded-full bg-brand-violet"></span>
+                  <h3 className="font-display font-bold text-sm text-[#F5F3FF] uppercase tracking-wider">
+                    Quick Inquiry Composer
+                  </h3>
+                </div>
 
-                <a
-                  href={personalInfo.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.03] hover:bg-white/10 text-zinc-300 hover:text-white border border-white/[0.08] hover:border-white/20 text-xs font-mono transition-all"
-                >
-                  <GithubIcon className="w-4 h-4" />
-                  <span>GitHub</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
-                </a>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-mono text-ink-muted mb-1.5">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="e.g. Jordan Lee"
+                      className="w-full px-4 py-3 rounded-2xl bg-[#090512]/90 border border-purple-500/20 text-sm text-[#F5F3FF] placeholder-ink-muted/50 focus:outline-none focus:border-brand-lavender transition-colors"
+                    />
+                  </div>
 
-                <a
-                  href={personalInfo.leetcode}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.03] hover:bg-amber-500/10 text-zinc-300 hover:text-amber-300 border border-white/[0.08] hover:border-amber-500/30 text-xs font-mono transition-all"
-                >
-                  <Code2 className="w-4 h-4 text-amber-400" />
-                  <span>LeetCode (200+)</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
-                </a>
+                  <div>
+                    <label className="block text-xs font-mono text-ink-muted mb-1.5">
+                      Your Email (Optional)
+                    </label>
+                    <input
+                      type="email"
+                      value={senderEmail}
+                      onChange={(e) => setSenderEmail(e.target.value)}
+                      placeholder="jordan@company.com"
+                      className="w-full px-4 py-3 rounded-2xl bg-[#090512]/90 border border-purple-500/20 text-sm text-[#F5F3FF] placeholder-ink-muted/50 focus:outline-none focus:border-brand-lavender transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono text-ink-muted mb-1.5">
+                      Message / Project Details
+                    </label>
+                    <textarea
+                      required
+                      rows={4}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder="Tell me about your product vision, full-stack opening, or collaboration idea..."
+                      className="w-full px-4 py-3 rounded-2xl bg-[#090512]/90 border border-purple-500/20 text-sm text-[#F5F3FF] placeholder-ink-muted/50 focus:outline-none focus:border-brand-lavender transition-colors resize-none"
+                    ></textarea>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-semibold text-sm transition-all shadow-[0_0_20px_rgba(139,92,246,0.35)]"
+                  >
+                    <Send className="w-4 h-4" />
+                    <span>Send a Message</span>
+                  </button>
+
+                  {sentStatus && (
+                    <p className="text-xs text-brand-lavender text-center font-mono mt-2">
+                      {sentStatus}
+                    </p>
+                  )}
+                </form>
               </div>
             </div>
 
-            {/* Direct Mailto CTA button */}
-            <div className="pt-4">
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-base transition-all shadow-[0_10px_30px_-10px_rgba(16,185,129,0.3)] hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <span>Send Email Directly</span>
-                <ArrowUpRight className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column: Interactive Quick Message Box */}
-          <div className="lg:col-span-6">
-            <div className="p-6 sm:p-8 rounded-2xl bg-[#0e1118]/80 border border-white/[0.07] backdrop-blur-md">
-              <div className="flex items-center gap-2 mb-6 pb-3 border-b border-white/[0.05]">
-                <MessageSquare className="w-4 h-4 text-emerald-400" />
-                <h3 className="font-mono text-sm font-bold text-zinc-200 uppercase tracking-wide">
-                  Quick Message
-                </h3>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-mono text-zinc-400 mb-1.5">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="e.g. Alex Morgan"
-                    className="w-full px-4 py-2.5 rounded-lg bg-zinc-950/80 border border-white/[0.08] text-sm text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-emerald-500/50 transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-mono text-zinc-400 mb-1.5">
-                    Your Email (Optional)
-                  </label>
-                  <input
-                    type="email"
-                    value={senderEmail}
-                    onChange={(e) => setSenderEmail(e.target.value)}
-                    placeholder="alex@company.com"
-                    className="w-full px-4 py-2.5 rounded-lg bg-zinc-950/80 border border-white/[0.08] text-sm text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-emerald-500/50 transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-mono text-zinc-400 mb-1.5">
-                    Project / Role Details
-                  </label>
-                  <textarea
-                    required
-                    rows={4}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Tell me about your product vision, open role, or collaboration idea..."
-                    className="w-full px-4 py-2.5 rounded-lg bg-zinc-950/80 border border-white/[0.08] text-sm text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-emerald-500/50 transition-colors resize-none"
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-white/10 hover:bg-emerald-500 text-zinc-200 hover:text-zinc-950 font-semibold text-sm transition-all border border-white/10 hover:border-emerald-500 shadow-sm"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>Compose & Send via Mail Client</span>
-                </button>
-
-                {sentStatus && (
-                  <p className="text-xs text-emerald-400 text-center font-mono mt-2">
-                    {sentStatus}
-                  </p>
-                )}
-              </form>
-            </div>
           </div>
 
         </div>

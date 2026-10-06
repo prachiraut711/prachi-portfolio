@@ -11,18 +11,18 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 25);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
     { name: 'Work', href: '#work' },
     { name: 'About', href: '#about' },
     { name: 'Stack', href: '#stack' },
     { name: 'Experience', href: '#experience' },
+    { name: 'Contact', href: '#contact', isCta: true },
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -35,84 +35,76 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-[#090a0f]/80 backdrop-blur-md border-b border-white/[0.06] py-3.5 shadow-lg' 
-          : 'bg-transparent py-5'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          
-          {/* Brand Monogram & Name */}
-          <a
-            href="#home"
-            onClick={(e) => handleNavClick(e, '#home')}
-            className="flex items-center gap-3 group"
-          >
-            <div className="w-9 h-9 rounded-xl bg-zinc-900 border border-white/10 group-hover:border-emerald-500/40 flex items-center justify-center font-mono font-bold text-sm text-zinc-100 group-hover:text-emerald-400 transition-all">
-              PR
-            </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold text-sm sm:text-base tracking-wider text-white font-sans group-hover:text-emerald-300 transition-colors">
-                PRACHI RAUT
-              </span>
-              <span className="text-[10px] font-mono text-zinc-500 tracking-tight">
-                Software Developer
-              </span>
-            </div>
-          </a>
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 sm:py-5 px-4 sm:px-8">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        
+        {/* Brand: PRACHI. */}
+        <a
+          href="#home"
+          onClick={(e) => handleNavClick(e, '#home')}
+          className="group flex items-center gap-1.5 focus:outline-none"
+        >
+          <span className="font-display text-xl sm:text-2xl font-extrabold tracking-tight text-[#F5F3FF] group-hover:text-brand-lavender transition-colors">
+            PRACHI
+          </span>
+          <span className="w-2 h-2 rounded-full bg-brand-violet inline-block group-hover:scale-150 transition-transform"></span>
+        </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-zinc-950/60 p-1.5 rounded-full border border-white/[0.06] backdrop-blur-md">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.href.replace('#', '');
+        {/* Desktop Navigation Container: Modern Capsule */}
+        <nav
+          className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full border transition-all duration-300 ${
+            scrolled
+              ? 'bg-[#140D22]/85 backdrop-blur-xl border-purple-500/25 shadow-[0_8px_32px_rgba(124,58,237,0.18)]'
+              : 'bg-[#140D22]/60 backdrop-blur-lg border-purple-500/15'
+          }`}
+        >
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.replace('#', '');
+            if (link.isCta) {
               return (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-mono transition-all duration-200 ${
-                    isActive
-                      ? 'bg-white/10 text-white font-medium shadow-sm'
-                      : 'text-zinc-400 hover:text-white hover:bg-white/5'
-                  }`}
+                  className="ml-2 flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white text-xs font-medium font-sans shadow-[0_0_20px_rgba(139,92,246,0.35)] transition-all hover:scale-105 active:scale-95"
                 >
-                  {link.name}
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-soft animate-pulse"></span>
+                  <span>{link.name}</span>
                 </a>
               );
-            })}
-          </nav>
+            }
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                  isActive
+                    ? 'bg-purple-500/20 text-brand-lavender font-semibold shadow-sm'
+                    : 'text-ink-secondary hover:text-white hover:bg-white/[0.04]'
+                }`}
+              >
+                {link.name}
+              </a>
+            );
+          })}
+        </nav>
 
-          {/* Desktop Right: "Let's Talk" CTA */}
-          <div className="hidden md:flex items-center">
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, '#contact')}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-500/10 hover:bg-emerald-500 text-emerald-400 hover:text-zinc-950 border border-emerald-500/30 hover:border-emerald-500 text-xs font-mono font-semibold transition-all duration-200 shadow-sm"
-            >
-              <span>Let's Talk</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
-          </div>
+        {/* Mobile Hamburger Toggle */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden p-2.5 rounded-2xl bg-[#140D22]/80 border border-purple-500/20 text-[#F5F3FF] hover:text-brand-lavender focus:outline-none"
+          aria-label="Toggle Navigation"
+        >
+          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
 
-          {/* Mobile Menu Hamburger */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl bg-white/5 text-zinc-300 hover:text-white border border-white/10"
-            aria-label="Toggle navigation menu"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-
-        </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0a0c12]/95 backdrop-blur-xl border-b border-white/10 px-6 py-6 animate-fade-in">
-          <nav className="flex flex-col space-y-3">
+        <div className="md:hidden mt-3 max-w-sm mx-auto bg-[#140D22]/95 backdrop-blur-2xl border border-purple-500/25 rounded-3xl p-5 shadow-2xl animate-fade-in">
+          <nav className="flex flex-col space-y-2">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.replace('#', '');
               return (
@@ -120,24 +112,16 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-3 py-2 rounded-lg text-sm font-mono transition-colors ${
+                  className={`px-4 py-2.5 rounded-2xl text-sm font-medium transition-colors ${
                     isActive
-                      ? 'bg-emerald-500/10 text-emerald-400 font-semibold'
-                      : 'text-zinc-300 hover:text-white hover:bg-white/5'
+                      ? 'bg-purple-600/20 text-brand-lavender font-semibold'
+                      : 'text-ink-secondary hover:text-white hover:bg-white/5'
                   }`}
                 >
                   {link.name}
                 </a>
               );
             })}
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, '#contact')}
-              className="mt-2 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-emerald-500 text-zinc-950 font-mono font-bold text-sm shadow-md"
-            >
-              <span>Let's Talk</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
           </nav>
         </div>
       )}

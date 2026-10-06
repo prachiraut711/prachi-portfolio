@@ -1,10 +1,7 @@
 import React from 'react';
 import { personalInfo } from '../data/portfolioData';
-import { 
-  ArrowDown, ArrowUpRight, Code2, 
-  Terminal, Sparkles, Smartphone, Layers, CheckCircle 
-} from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
+import { ArrowDownRight, ArrowRight, Code2, Sparkles, Layers, Cpu, Smartphone, Globe } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const scrollTo = (id: string) => {
@@ -12,100 +9,80 @@ export const Hero: React.FC = () => {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const domainKeywords = [
-    { label: 'FULL-STACK', highlight: true },
-    { label: 'MOBILE', highlight: true },
-    { label: 'AI / ML', highlight: true },
-    { label: 'PYTHON', highlight: false },
-    { label: 'REACT', highlight: false },
-    { label: 'FLUTTER', highlight: false },
-    { label: 'FASTAPI', highlight: false },
-    { label: 'POSTGRESQL', highlight: false },
+  const floatingBadges = [
+    { name: 'React', icon: Globe, pos: '-top-3 left-4', anim: 'animate-float-slow', delay: '0s' },
+    { name: 'Python', icon: Cpu, pos: 'top-8 -right-4', anim: 'animate-float-reverse', delay: '1s' },
+    { name: 'Flutter', icon: Smartphone, pos: 'bottom-10 -right-6', anim: 'animate-float-slow', delay: '2s' },
+    { name: 'FastAPI', icon: Layers, pos: '-bottom-4 left-10', anim: 'animate-float-reverse', delay: '1.5s' },
+    { name: 'TypeScript', icon: Code2, pos: 'top-1/2 -left-8', anim: 'animate-float-slow', delay: '0.8s' },
+    { name: 'AI / ML', icon: Sparkles, pos: 'bottom-24 left-1/3', anim: 'animate-float-slow', delay: '2.5s' },
   ];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
+    <section id="home" className="relative min-h-[92vh] flex items-center justify-center pt-28 pb-20 overflow-hidden">
       
-      {/* Background ambient lighting */}
-      <div className="ambient-glow w-[500px] h-[500px] -top-32 -left-32 bg-emerald-500/10"></div>
-      <div className="ambient-glow w-[600px] h-[600px] top-1/4 -right-40 bg-teal-500/10"></div>
-      <div className="ambient-glow w-[400px] h-[400px] bottom-0 left-1/3 bg-indigo-500/10"></div>
+      {/* Background Soft Ambient Light Blobs */}
+      <div className="glow-orb w-[550px] h-[550px] -top-24 -left-20 bg-brand-purple/15"></div>
+      <div className="glow-orb w-[650px] h-[650px] top-1/3 -right-32 bg-brand-violet/12"></div>
+      <div className="glow-orb w-[450px] h-[450px] -bottom-20 left-1/4 bg-brand-lavender/10"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 w-full relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* Main Hero Copy */}
-          <div className="lg:col-span-7 space-y-6 sm:space-y-8">
+          {/* Left Column: Expressive Typography */}
+          <div className="lg:col-span-7 space-y-6 sm:space-y-7">
             
-            {/* Status Pill */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-mono">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span>Computer Engineering Graduate • Available for Roles</span>
+            {/* Small status pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-brand-lavender text-xs font-mono">
+              <span className="w-2 h-2 rounded-full bg-brand-violet animate-pulse"></span>
+              <span>Available for Software Engineering Roles • 2026 Grad</span>
             </div>
 
-            {/* Name & Primary Role */}
+            {/* Oversized Expressive Heading */}
             <div>
-              <span className="font-mono text-xs sm:text-sm uppercase tracking-widest text-zinc-400 block mb-2">
-                {personalInfo.name} — SOFTWARE DEVELOPER
-              </span>
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
-                Building products across <br />
-                <span className="text-gradient-emerald">Web • Mobile • AI</span>
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-display font-medium text-ink-secondary mb-1">
+                Hi, I'm Prachi.
+              </div>
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-[#F5F3FF] leading-[1.08]">
+                Software Developer <br />
+                <span className="text-gradient-purple">building across</span> <br />
+                <span className="text-gradient-vibrant">Web, Mobile & AI.</span>
               </h1>
             </div>
 
-            {/* Supporting statement */}
-            <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-xl">
-              {personalInfo.heroStatement}
+            {/* Supporting Text */}
+            <p className="text-base sm:text-lg text-ink-secondary leading-relaxed max-w-xl font-normal">
+              Computer Engineering graduate crafting scalable full-stack applications, mobile experiences, and applied AI systems with engineering precision.
             </p>
-
-            {/* Domain Keywords Strip */}
-            <div className="flex flex-wrap items-center gap-2 pt-1">
-              {domainKeywords.map((tag) => (
-                <span
-                  key={tag.label}
-                  className={`text-[11px] font-mono px-2.5 py-1 rounded-md transition-colors ${
-                    tag.highlight
-                      ? 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/25 font-semibold'
-                      : 'bg-white/[0.03] text-zinc-400 border border-white/[0.06]'
-                  }`}
-                >
-                  {tag.label}
-                </span>
-              ))}
-            </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <button
                 onClick={() => scrollTo('work')}
-                className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-zinc-100 hover:bg-emerald-400 text-zinc-950 font-bold text-sm transition-all duration-200 shadow-lg shadow-white/5 hover:shadow-emerald-500/20"
+                className="btn-studio-primary px-7 py-3.5 text-sm flex items-center gap-2.5 group"
               >
-                <span>View My Work</span>
-                <ArrowDown className="w-4 h-4" />
+                <span>Explore My Work</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
 
               <button
                 onClick={() => scrollTo('contact')}
-                className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-zinc-200 hover:text-white border border-white/10 text-sm font-medium transition-all duration-200"
+                className="btn-studio-secondary px-7 py-3.5 text-sm flex items-center gap-2"
               >
-                <span>Let's Talk</span>
-                <ArrowUpRight className="w-4 h-4 text-emerald-400" />
+                <span>Let's Connect</span>
+                <ArrowDownRight className="w-4 h-4 text-brand-lavender" />
               </button>
             </div>
 
-            {/* Social Links Row */}
-            <div className="flex items-center gap-4 pt-4 border-t border-white/[0.05]">
-              <span className="text-xs font-mono text-zinc-500">Connect:</span>
-              <div className="flex items-center gap-3">
+            {/* Social Icons Strip */}
+            <div className="flex items-center gap-4 pt-4 border-t border-purple-500/15">
+              <span className="text-xs font-mono text-ink-muted">Find me on:</span>
+              <div className="flex items-center gap-2.5">
                 <a
                   href={personalInfo.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-white/[0.03] hover:bg-white/10 text-zinc-400 hover:text-white border border-white/5 transition-colors"
+                  className="p-2.5 rounded-full bg-[#140D22] border border-purple-500/20 text-ink-secondary hover:text-white hover:border-purple-400/50 transition-all hover:scale-110"
                   title="GitHub Profile"
                 >
                   <GithubIcon className="w-4 h-4" />
@@ -114,7 +91,7 @@ export const Hero: React.FC = () => {
                   href={personalInfo.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-white/[0.03] hover:bg-emerald-500/20 text-zinc-400 hover:text-emerald-400 border border-white/5 transition-colors"
+                  className="p-2.5 rounded-full bg-[#140D22] border border-purple-500/20 text-ink-secondary hover:text-brand-lavender hover:border-purple-400/50 transition-all hover:scale-110"
                   title="LinkedIn Profile"
                 >
                   <LinkedinIcon className="w-4 h-4" />
@@ -123,7 +100,7 @@ export const Hero: React.FC = () => {
                   href={personalInfo.leetcode}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-white/[0.03] hover:bg-amber-500/20 text-zinc-400 hover:text-amber-400 border border-white/5 transition-colors"
+                  className="p-2.5 rounded-full bg-[#140D22] border border-purple-500/20 text-ink-secondary hover:text-amber-300 hover:border-amber-400/50 transition-all hover:scale-110"
                   title="LeetCode Profile (200+ Solved)"
                 >
                   <Code2 className="w-4 h-4" />
@@ -133,77 +110,49 @@ export const Hero: React.FC = () => {
 
           </div>
 
-          {/* Right Hero Graphic: Engineering Ecosystem Terminal */}
-          <div className="lg:col-span-5">
-            <div className="relative rounded-2xl bg-[#0d0f17]/90 border border-white/10 p-5 sm:p-6 backdrop-blur-xl shadow-2xl">
+          {/* Right Column: Abstract Digital Studio Identity Graphic */}
+          <div className="lg:col-span-5 flex items-center justify-center relative">
+            <div className="relative w-[320px] sm:w-[400px] h-[360px] sm:h-[440px] flex items-center justify-center">
               
-              {/* Window Bar */}
-              <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/[0.06]">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-rose-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-amber-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/80"></div>
-                  <span className="ml-2 font-mono text-xs text-zinc-400">prachi-raut.config.ts</span>
-                </div>
-                <span className="font-mono text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/20">
-                  Ready to Ship
-                </span>
-              </div>
+              {/* Outer Glowing Orbital Rings */}
+              <div className="absolute inset-0 rounded-full border border-purple-500/15 animate-spin-very-slow pointer-events-none"></div>
+              <div className="absolute inset-6 rounded-full border border-dashed border-purple-400/20 pointer-events-none"></div>
 
-              {/* Code-style Content */}
-              <div className="font-mono text-xs space-y-3 leading-relaxed text-zinc-300">
-                <div className="text-zinc-500">// Engineering Profile Matrix</div>
-                <div>
-                  <span className="text-emerald-400">const</span>{' '}
-                  <span className="text-zinc-100">engineer</span> = &#123;
-                </div>
-                
-                <div className="pl-4 space-y-1 text-zinc-400">
-                  <div>
-                    <span className="text-zinc-500">name:</span>{' '}
-                    <span className="text-emerald-300">"Prachi Raut"</span>,
+              {/* Central Glowing Purple Sphere / Composition */}
+              <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-full bg-gradient-to-tr from-purple-900/80 via-violet-600/40 to-indigo-500/30 p-1 shadow-[0_0_80px_rgba(124,58,237,0.35)] backdrop-blur-xl flex items-center justify-center group">
+                <div className="w-full h-full rounded-full bg-[#150D26]/90 border border-purple-400/30 flex flex-col items-center justify-center text-center p-6">
+                  
+                  {/* Digital Studio Core Emblem */}
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-violet-600 to-purple-500 flex items-center justify-center mb-3 shadow-[0_0_30px_rgba(139,92,246,0.5)]">
+                    <Sparkles className="w-8 h-8 text-white" />
                   </div>
-                  <div>
-                    <span className="text-zinc-500">education:</span>{' '}
-                    <span className="text-zinc-200">"B.E. Computer Engineering (8.66 CGPA)"</span>,
-                  </div>
-                  <div>
-                    <span className="text-zinc-500">coreFocus:</span> [
-                    <span className="text-cyan-300">"Full-Stack"</span>,{' '}
-                    <span className="text-indigo-300">"Mobile"</span>,{' '}
-                    <span className="text-emerald-300">"AI/ML"</span>
-                    ],
-                  </div>
-                  <div>
-                    <span className="text-zinc-500">dsaProblemsSolved:</span>{' '}
-                    <span className="text-amber-300">200+</span>,
-                  </div>
-                  <div>
-                    <span className="text-zinc-500">verifiedProjects:</span>{' '}
-                    <span className="text-emerald-400">9</span>,
-                  </div>
-                  <div>
-                    <span className="text-zinc-500">activeStack:</span> &#123;
-                  </div>
-                  <div className="pl-4 text-zinc-400">
-                    <div>web: <span className="text-zinc-200">"React, Node.js, FastAPI"</span>,</div>
-                    <div>mobile: <span className="text-zinc-200">"Flutter, React Native"</span>,</div>
-                    <div>intelligence: <span className="text-zinc-200">"Gemini AI, YOLOv8, DuckDB"</span></div>
-                  </div>
-                  <div>&#125;</div>
-                </div>
-
-                <div>&#125;;</div>
-
-                {/* Live execution simulated output */}
-                <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-[11px]">
-                  <span className="text-zinc-500 flex items-center gap-1.5">
-                    <Terminal className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>status: 0 errors, ready for production</span>
+                  
+                  <span className="font-display font-bold text-lg text-[#F5F3FF] tracking-tight">
+                    PRACHI RAUT
                   </span>
-                  <span className="text-emerald-400 font-semibold">build passing ?</span>
+                  <span className="font-mono text-xs text-brand-lavender mt-1">
+                    Creative Engineer
+                  </span>
+                  <div className="mt-2 text-[11px] text-ink-muted">
+                    8.66 CGPA • 9 Projects
+                  </div>
                 </div>
               </div>
+
+              {/* Floating Technology Capsules */}
+              {floatingBadges.map((badge, idx) => {
+                const IconComponent = badge.icon;
+                return (
+                  <div
+                    key={badge.name}
+                    className={`absolute ${badge.pos} ${badge.anim} z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A122B]/90 border border-purple-400/30 text-xs font-mono text-ink-primary shadow-[0_8px_20px_rgba(13,9,23,0.5)] backdrop-blur-md hover:border-brand-lavender transition-all`}
+                    style={{ animationDelay: badge.delay }}
+                  >
+                    <IconComponent className="w-3.5 h-3.5 text-brand-lavender" />
+                    <span>{badge.name}</span>
+                  </div>
+                );
+              })}
 
             </div>
           </div>

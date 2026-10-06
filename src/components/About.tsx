@@ -1,117 +1,145 @@
 import React from 'react';
 import { personalInfo, highlightStats } from '../data/portfolioData';
-import { Code2, GraduationCap, Briefcase, Sparkles, ExternalLink } from 'lucide-react';
+import { Layers, Smartphone, Sparkles, Code2, ArrowUpRight } from 'lucide-react';
 
 export const About: React.FC = () => {
+  const capabilities = [
+    {
+      title: 'FULL-STACK',
+      detail: 'Web applications + REST APIs',
+      tools: 'React • Node.js • FastAPI • PostgreSQL',
+      icon: Layers,
+    },
+    {
+      title: 'MOBILE',
+      detail: 'Flutter + React Native',
+      tools: 'Cross-platform • Firebase • Supabase',
+      icon: Smartphone,
+    },
+    {
+      title: 'AI / ML',
+      detail: 'Computer vision + intelligent systems',
+      tools: 'YOLOv8 • Gemini AI • Isolation Forest',
+      icon: Sparkles,
+    },
+    {
+      title: 'PROBLEM SOLVING',
+      detail: '200+ LeetCode problems',
+      tools: 'DSA • Algorithmic Optimization',
+      icon: Code2,
+    },
+  ];
+
   return (
-    <section id="about" className="py-24 sm:py-32 relative scroll-mt-20 border-t border-white/[0.04]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-24 sm:py-32 relative scroll-mt-20">
+      
+      {/* Background soft ambient bloom */}
+      <div className="glow-orb w-[500px] h-[500px] top-1/2 -left-40 bg-brand-purple/10"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
         
-        {/* Section Pill */}
-        <div className="flex items-center gap-2 mb-3">
-          <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span className="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold">
-            02 / About & Philosophy
+        {/* Top Header Badge */}
+        <div className="flex items-center gap-2 mb-4">
+          <span className="w-2 h-2 rounded-full bg-brand-lavender"></span>
+          <span className="font-mono text-xs uppercase tracking-widest text-brand-lavender font-semibold">
+            About & Capabilities
           </span>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        {/* Two-Column Asymmetric Statement Layout */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-14 items-start mb-16">
           
-          {/* Left Column: Heading and Narrative */}
-          <div className="lg:col-span-7 space-y-6">
-            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Bridging engineering rigor with real-world product delivery.
+          {/* Left Column: Big Statement */}
+          <div className="lg:col-span-5">
+            <h2 className="text-3xl sm:text-5xl font-display font-extrabold tracking-tight text-[#F5F3FF] leading-[1.12]">
+              I like building things <br />
+              <span className="text-gradient-purple">that actually work.</span>
             </h2>
+            <div className="mt-6 w-16 h-1 rounded-full bg-gradient-to-r from-violet-500 to-purple-500"></div>
+          </div>
 
-            <p className="text-base sm:text-lg text-zinc-300 leading-relaxed font-light">
-              {personalInfo.aboutIntro}
+          {/* Right Column: Professional Description */}
+          <div className="lg:col-span-7 space-y-5">
+            <p className="text-lg sm:text-xl text-ink-primary font-normal leading-relaxed">
+              I’m a Computer Engineering graduate with hands-on experience building full-stack web applications, mobile applications, backend systems, and AI/ML-powered products.
             </p>
-
-            <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
-              {personalInfo.aboutDetailed}
+            <p className="text-sm sm:text-base text-ink-secondary leading-relaxed">
+              My engineering approach prioritizes clean architecture, practical utility, and scalable delivery. Whether designing high-throughput Redis event pipelines, training YOLOv8 computer vision models, or crafting smooth Flutter interfaces, I build with curiosity and engineering rigor.
             </p>
-
-            <div className="p-4 rounded-xl bg-zinc-950/60 border border-white/[0.06] flex items-start gap-3.5">
-              <Code2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-              <div>
-                <span className="text-sm font-semibold text-zinc-200 block mb-1">
-                  Algorithmic Problem Solving
-                </span>
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                  {personalInfo.aboutDsa}
-                </p>
-                <a
-                  href={personalInfo.leetcode}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400 hover:text-emerald-300 mt-2 transition-colors"
-                >
-                  <span>Verify LeetCode Profile</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            </div>
-
-            {/* Core Domain Badges */}
-            <div className="pt-2">
-              <span className="text-xs font-mono uppercase tracking-wider text-zinc-500 block mb-3">
-                Core Domains of Focus
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  'Full-Stack Web Systems',
-                  'Cross-Platform Mobile (Flutter & React Native)',
-                  'Applied AI & Machine Learning',
-                  'Backend Architecture & REST APIs',
-                  'Data Structures & Algorithms'
-                ].map((item, i) => (
-                  <span
-                    key={i}
-                    className="text-xs px-3 py-1.5 rounded-full bg-white/[0.03] text-zinc-300 border border-white/[0.08]"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
+            <div className="pt-2 flex items-center gap-4">
+              <a
+                href={personalInfo.leetcode}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-mono text-brand-lavender hover:text-white transition-colors"
+              >
+                <span>Verify LeetCode Activity (200+ Solved)</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
 
-          {/* Right Column: Statistics Grid */}
-          <div className="lg:col-span-5 space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              {highlightStats.map((stat, idx) => (
-                <div
-                  key={idx}
-                  className="p-6 rounded-2xl bg-[#0e1118]/90 border border-white/[0.06] hover:border-emerald-500/25 transition-all duration-300 flex flex-col justify-between group"
-                >
-                  <div className="text-3xl sm:text-4xl font-extrabold text-white font-sans tracking-tight group-hover:text-emerald-300 transition-colors">
-                    {stat.value}
+        </div>
+
+        {/* 4 Interactive Capability Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+          {capabilities.map((cap) => {
+            const IconComp = cap.icon;
+            return (
+              <div
+                key={cap.title}
+                className="p-6 rounded-3xl bg-[#140D22]/80 border border-purple-500/15 hover:border-purple-400/40 hover:bg-[#1A122B]/90 transition-all duration-300 group flex flex-col justify-between shadow-lg"
+              >
+                <div>
+                  <div className="w-10 h-10 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-brand-lavender mb-4 group-hover:scale-110 group-hover:bg-purple-500/20 transition-all">
+                    <IconComp className="w-5 h-5" />
                   </div>
-                  <div className="mt-4">
-                    <div className="text-xs sm:text-sm font-semibold text-zinc-200">
-                      {stat.label}
-                    </div>
-                    <div className="text-[11px] text-zinc-500 mt-0.5 leading-snug">
-                      {stat.detail}
-                    </div>
-                  </div>
+                  <h3 className="font-mono text-xs font-bold text-brand-lavender uppercase tracking-wider mb-1">
+                    {cap.title}
+                  </h3>
+                  <p className="font-display font-semibold text-base text-[#F5F3FF] mb-2">
+                    {cap.detail}
+                  </p>
                 </div>
-              ))}
-            </div>
-
-            {/* Quick Status Pill */}
-            <div className="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 flex items-center justify-between text-xs text-emerald-300">
-              <div className="flex items-center gap-2.5">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span className="font-medium">Open to Software Engineering Opportunities</span>
+                <div className="pt-3 border-t border-purple-500/10 text-[11px] font-mono text-ink-muted">
+                  {cap.tools}
+                </div>
               </div>
-              <span className="font-mono text-[10px] text-emerald-400/80">2026 Batch</span>
+            );
+          })}
+        </div>
+
+        {/* Highlights / A Few Numbers Section (Playful arrangement) */}
+        <div className="p-8 sm:p-10 rounded-4xl bg-gradient-to-br from-[#170E2B]/90 via-[#140D22]/80 to-[#10091D]/90 border border-purple-500/20 shadow-2xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-purple-500/15">
+            <div>
+              <span className="font-mono text-xs uppercase tracking-wider text-brand-lavender block">
+                Highlights at a glance
+              </span>
+              <h3 className="font-display font-bold text-xl sm:text-2xl text-[#F5F3FF]">
+                A few numbers that define my work
+              </h3>
             </div>
+            <span className="font-mono text-xs text-ink-muted">
+              Computer Engineering • 2026
+            </span>
           </div>
 
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {highlightStats.map((stat, i) => (
+              <div key={i} className="group">
+                <div className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-gradient-vibrant tracking-tight">
+                  {stat.value}
+                </div>
+                <div className="mt-2 font-display font-semibold text-sm sm:text-base text-ink-primary">
+                  {stat.label}
+                </div>
+                <div className="text-xs text-ink-muted mt-0.5">
+                  {stat.detail}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>
