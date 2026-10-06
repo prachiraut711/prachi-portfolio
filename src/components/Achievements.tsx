@@ -1,8 +1,10 @@
 import React from 'react';
 import { achievementsData, personalInfo } from '../data/portfolioData';
-import { Award, Code2, ArrowUpRight, Calendar, Sparkles } from 'lucide-react';
+import { Award, Code2, ArrowUpRight } from 'lucide-react';
 
 export const Achievements: React.FC = () => {
+  const certifications = achievementsData.filter(item => item.id !== 'leetcode');
+
   return (
     <section className="py-16 sm:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
@@ -46,29 +48,59 @@ export const Achievements: React.FC = () => {
           </div>
         </div>
 
-        {/* Professional Certification Card */}
-        <div className="p-7 sm:p-8 rounded-3xl bg-[#140D22]/85 border border-purple-500/15 hover:border-purple-400/35 transition-all shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div className="flex items-start gap-4">
-            <div className="p-3.5 rounded-2xl bg-purple-500/15 text-brand-lavender border border-purple-500/25 shrink-0">
-              <Award className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2 text-xs font-mono text-brand-lavender mb-1">
-                <span>DataFlair Credential</span>
-                <span>•</span>
-                <span className="text-ink-muted">November 2023</span>
-              </div>
-              <h4 className="text-lg sm:text-xl font-display font-bold text-[#F5F3FF]">
-                Python Certification — Learn Python from Scratch
-              </h4>
-              <p className="text-xs sm:text-sm text-ink-secondary mt-1">
-                Verified foundational certification in Python scripting, OOP architecture, and data manipulation.
-              </p>
-            </div>
+        {/* Certifications Block */}
+        <div>
+          <div className="flex items-center gap-2 mb-6">
+            <span className="w-2 h-2 rounded-full bg-brand-lavender"></span>
+            <h4 className="font-mono text-xs uppercase tracking-widest text-brand-lavender font-semibold">
+              Professional Certifications
+            </h4>
           </div>
 
-          <div className="px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-mono text-brand-soft shrink-0">
-            Verified Certificate
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {certifications.map((cert) => (
+              <div
+                key={cert.id}
+                className="p-7 sm:p-8 rounded-3xl bg-[#140D22]/85 border border-purple-500/15 hover:border-purple-400/35 transition-all shadow-xl flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2 text-xs font-mono text-brand-lavender">
+                      <span>{cert.issuer}</span>
+                      {cert.date && (
+                        <>
+                          <span>•</span>
+                          <span className="text-ink-muted">{cert.date}</span>
+                        </>
+                      )}
+                    </div>
+                    <span className="px-3 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-[11px] font-mono text-brand-soft">
+                      Verified
+                    </span>
+                  </div>
+
+                  <div className="flex items-start gap-3.5 mb-3">
+                    <div className="p-2.5 rounded-2xl bg-purple-500/15 text-brand-lavender border border-purple-500/25 shrink-0 group-hover:scale-110 transition-transform">
+                      <Award className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h5 className="text-lg font-display font-bold text-[#F5F3FF] group-hover:text-brand-lavender transition-colors leading-snug">
+                        {cert.title}
+                      </h5>
+                    </div>
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed pl-12">
+                    {cert.description}
+                  </p>
+                </div>
+
+                <div className="mt-5 pt-4 border-t border-purple-500/10 flex items-center justify-between text-xs font-mono text-ink-muted">
+                  <span>Provider: {cert.issuer}</span>
+                  <span className="text-brand-soft">Credentialed</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 

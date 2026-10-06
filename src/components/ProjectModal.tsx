@@ -31,126 +31,138 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#090510]/85 backdrop-blur-xl animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#090510]/85 backdrop-blur-xl animate-fade-in"
       onClick={onClose}
     >
       <div 
-        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-[#140D22] border border-purple-500/25 rounded-4xl shadow-[0_25px_80px_rgba(124,58,237,0.35)] p-6 sm:p-8 text-[#F5F3FF]"
+        className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto bg-[#140D22] border border-purple-500/25 rounded-3xl sm:rounded-4xl shadow-[0_25px_80px_rgba(124,58,237,0.35)] p-6 sm:p-10 text-[#F5F3FF]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
           aria-label="Close project modal"
-          className="absolute top-6 right-6 p-2 rounded-full bg-white/5 hover:bg-purple-500/20 border border-purple-500/20 text-ink-muted hover:text-white transition-colors"
+          className="sticky top-0 float-right -mt-2 -mr-2 sm:-mt-3 sm:-mr-3 p-2.5 rounded-full bg-[#1F1435]/90 hover:bg-purple-500/25 border border-purple-500/25 text-ink-muted hover:text-white transition-all shadow-md z-10"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Domain Badge */}
-        <div className="flex items-center gap-2 mb-3">
+        <div className="flex items-center gap-2.5 mb-3.5">
           <span className="font-mono text-xs font-semibold px-3 py-1 rounded-full bg-purple-500/15 text-brand-lavender border border-purple-500/25">
             {project.domainLabel}
           </span>
           {project.featured && (
-            <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-gradient-to-r from-violet-600/30 to-purple-600/30 text-brand-soft border border-purple-400/20">
-              Featured Architecture
+            <span className="text-xs font-mono px-3 py-1 rounded-full bg-gradient-to-r from-violet-600/30 to-purple-600/30 text-brand-soft border border-purple-400/25">
+              Featured Case Study
             </span>
           )}
         </div>
 
         {/* Title & Subtitle */}
-        <h2 className="text-2xl sm:text-3xl font-display font-extrabold tracking-tight text-[#F5F3FF] mb-2">
+        <h2 className="text-2xl sm:text-4xl font-display font-extrabold tracking-tight text-[#F5F3FF] mb-2 leading-tight">
           {project.name}
         </h2>
-        <p className="text-sm sm:text-base text-brand-soft/90 mb-6 font-sans">
+        <p className="text-sm sm:text-base text-brand-soft font-sans mb-8">
           {project.subtitle}
         </p>
 
         {/* Visual Component */}
-        <div className="mb-6">
+        <div className="mb-10 rounded-2xl overflow-hidden border border-purple-500/20 shadow-lg">
           <ProjectVisual type={project.visualType} name={project.name} />
         </div>
 
-        {/* Project Overview */}
-        <div className="mb-6">
-          <h3 className="text-xs font-mono uppercase tracking-wider text-brand-lavender mb-2 flex items-center gap-2">
+        {/* Section 1: Project Overview */}
+        <div className="mb-10 sm:mb-12">
+          <div className="flex items-center gap-2.5 text-xs sm:text-sm font-mono uppercase tracking-wider text-brand-lavender font-semibold">
             <FileText className="w-4 h-4 text-brand-violet" />
-            Project Overview
-          </h3>
-          <p className="text-sm sm:text-base text-ink-primary leading-relaxed">
-            {project.description}
-          </p>
+            <span>Project Overview</span>
+          </div>
+          <div className="mt-3 sm:mt-4 pl-0 sm:pl-6 border-l-0 sm:border-l-2 sm:border-purple-500/20">
+            <p className="text-sm sm:text-base text-ink-primary leading-relaxed font-normal">
+              {project.description}
+            </p>
+          </div>
         </div>
 
-        {/* Problem & Solution block */}
+        {/* Section 2: The Problem */}
         {project.problemSolution && (
-          <div className="grid sm:grid-cols-2 gap-4 mb-6">
-            <div className="bg-[#0B0616]/90 p-4 rounded-2xl border border-purple-500/15">
-              <div className="flex items-center gap-2 text-pink-400 text-xs font-mono uppercase tracking-wider mb-2">
-                <AlertCircle className="w-4 h-4" />
-                The Problem
+          <>
+            <div className="mb-10 sm:mb-12">
+              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-mono uppercase tracking-wider text-pink-400 font-semibold">
+                <AlertCircle className="w-4 h-4 text-pink-400" />
+                <span>The Problem</span>
               </div>
-              <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
-                {project.problemSolution.problem}
-              </p>
-            </div>
-            <div className="bg-[#0B0616]/90 p-4 rounded-2xl border border-purple-500/15">
-              <div className="flex items-center gap-2 text-brand-lavender text-xs font-mono uppercase tracking-wider mb-2">
-                <Lightbulb className="w-4 h-4" />
-                Engineering Solution
+              <div className="mt-3 sm:mt-4 pl-0 sm:pl-6 border-l-0 sm:border-l-2 sm:border-pink-500/20">
+                <p className="text-sm sm:text-base text-ink-secondary leading-relaxed">
+                  {project.problemSolution.problem}
+                </p>
               </div>
-              <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
-                {project.problemSolution.solution}
-              </p>
             </div>
-          </div>
+
+            {/* Section 3: Engineering Solution */}
+            <div className="mb-10 sm:mb-12">
+              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-mono uppercase tracking-wider text-brand-lavender font-semibold">
+                <Lightbulb className="w-4 h-4 text-brand-violet" />
+                <span>Engineering Solution</span>
+              </div>
+              <div className="mt-3 sm:mt-4 pl-0 sm:pl-6 border-l-0 sm:border-l-2 sm:border-purple-500/20">
+                <p className="text-sm sm:text-base text-ink-secondary leading-relaxed">
+                  {project.problemSolution.solution}
+                </p>
+              </div>
+            </div>
+          </>
         )}
 
-        {/* Key Features */}
-        <div className="mb-6">
-          <h3 className="text-xs font-mono uppercase tracking-wider text-brand-lavender mb-3 flex items-center gap-2">
+        {/* Section 4: Key Technical Implementations */}
+        <div className="mb-10 sm:mb-12">
+          <div className="flex items-center gap-2.5 text-xs sm:text-sm font-mono uppercase tracking-wider text-brand-lavender font-semibold">
             <CheckCircle2 className="w-4 h-4 text-brand-violet" />
-            Key Technical Implementations
-          </h3>
-          <ul className="space-y-2.5">
-            {project.features.map((feature, i) => (
-              <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-ink-primary">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-violet mt-2 shrink-0"></span>
-                <span>{feature}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Technologies */}
-        <div className="mb-8">
-          <h3 className="text-xs font-mono uppercase tracking-wider text-brand-lavender mb-3 flex items-center gap-2">
-            <Layers className="w-4 h-4 text-brand-violet" />
-            Technology Stack
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {project.techStack.map((tech) => (
-              <span 
-                key={tech} 
-                className="text-xs font-mono px-3 py-1 rounded-full bg-purple-900/25 text-brand-soft border border-purple-500/20"
-              >
-                {tech}
-              </span>
-            ))}
+            <span>Key Technical Implementations</span>
+          </div>
+          <div className="mt-3 sm:mt-4 pl-0 sm:pl-6 border-l-0 sm:border-l-2 sm:border-purple-500/20">
+            <ul className="space-y-3">
+              {project.features.map((feature, i) => (
+                <li key={i} className="flex items-start gap-3 text-xs sm:text-sm text-ink-primary leading-relaxed">
+                  <span className="w-2 h-2 rounded-full bg-brand-violet mt-1.5 shrink-0 shadow-[0_0_8px_rgba(139,92,246,0.6)]"></span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        {/* Action Links */}
-        <div className="flex flex-wrap items-center gap-3 pt-5 border-t border-purple-500/15">
+        {/* Section 5: Technology Stack */}
+        <div className="mb-10 sm:mb-12">
+          <div className="flex items-center gap-2.5 text-xs sm:text-sm font-mono uppercase tracking-wider text-brand-lavender font-semibold">
+            <Layers className="w-4 h-4 text-brand-violet" />
+            <span>Technology Stack</span>
+          </div>
+          <div className="mt-3 sm:mt-4 pl-0 sm:pl-6 border-l-0 sm:border-l-2 sm:border-purple-500/20">
+            <div className="flex flex-wrap gap-2">
+              {project.techStack.map((tech) => (
+                <span 
+                  key={tech} 
+                  className="text-xs font-mono px-3.5 py-1.5 rounded-full bg-purple-900/25 text-brand-soft border border-purple-500/20"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Action Links Row */}
+        <div className="flex flex-wrap items-center gap-3 pt-6 sm:pt-8 border-t border-purple-500/20">
           <a
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-medium text-sm transition-all shadow-[0_0_20px_rgba(139,92,246,0.35)]"
+            className="flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-medium text-sm transition-all shadow-[0_0_20px_rgba(139,92,246,0.35)] hover:scale-105"
           >
             <GithubIcon className="w-4 h-4" />
-            View Repository
+            <span>View Repository</span>
           </a>
 
           {project.liveDemoUrl && (
@@ -158,10 +170,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               href={project.liveDemoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-purple-500/15 hover:bg-purple-500/25 text-brand-lavender border border-purple-500/30 font-medium text-sm transition-all"
+              className="flex items-center gap-2 px-5 py-3 rounded-full bg-purple-500/15 hover:bg-purple-500/25 text-brand-lavender border border-purple-500/30 font-medium text-sm transition-all hover:scale-105"
             >
               <ExternalLink className="w-4 h-4" />
-              Live Demo
+              <span>Live Demo</span>
             </a>
           )}
 
@@ -170,10 +182,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               href={project.videoDemoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-pink-500/15 hover:bg-pink-500/25 text-pink-300 border border-pink-500/30 font-medium text-sm transition-all"
+              className="flex items-center gap-2 px-5 py-3 rounded-full bg-pink-500/15 hover:bg-pink-500/25 text-pink-300 border border-pink-500/30 font-medium text-sm transition-all hover:scale-105"
             >
               <Play className="w-4 h-4" />
-              Watch Video Demo
+              <span>Watch Video Demo</span>
             </a>
           )}
 
@@ -182,10 +194,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               href={project.docsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/[0.04] hover:bg-white/10 text-ink-secondary border border-purple-500/15 font-medium text-sm transition-all"
+              className="flex items-center gap-2 px-5 py-3 rounded-full bg-white/[0.04] hover:bg-white/10 text-ink-secondary border border-purple-500/20 font-medium text-sm transition-all hover:scale-105"
             >
               <FileText className="w-4 h-4 text-brand-lavender" />
-              API Docs
+              <span>API Docs</span>
             </a>
           )}
         </div>

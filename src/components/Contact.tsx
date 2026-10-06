@@ -3,32 +3,57 @@ import { personalInfo } from '../data/portfolioData';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { 
   Mail, Code2, Copy, Check, 
-  ArrowUpRight, Send, Sparkles 
+  ArrowUpRight, Send, Sparkles, FileText
 } from 'lucide-react';
 
 export const Contact: React.FC = () => {
-  const [copied, setCopied] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedDraft, setCopiedDraft] = useState(false);
   const [name, setName] = useState('');
   const [senderEmail, setSenderEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [sentStatus, setSentStatus] = useState<string | null>(null);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personalInfo.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2500);
+  };
+
+  const handleCopyDraft = () => {
+    if (!name.trim() && !message.trim()) return;
+    const draftText = `To: ${personalInfo.email}\nSubject: Portfolio Contact from ${name.trim() || 'Visitor'}\n\nHi Prachi,\n\n${message.trim()}\n\n---\nFrom: ${name.trim()}\nEmail: ${senderEmail.trim() || 'Not specified'}`;
+    navigator.clipboard.writeText(draftText);
+    setCopiedDraft(true);
+    setTimeout(() => setCopiedDraft(false), 2500);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !message.trim()) return;
 
-    const subject = encodeURIComponent(`Inquiry from ${name}`);
-    const body = encodeURIComponent(
-      `Hello Prachi,\n\n${message}\n\nFrom: ${name} (${senderEmail || 'Not specified'})`
-    );
-    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
-    setSentStatus('Redirected to your email client to send!');
+    const trimmedName = name.trim();
+    const trimmedEmail = senderEmail.trim();
+    const trimmedMessage = message.trim();
+
+    const subject = `Portfolio Contact from ${trimmedName}`;
+    const bodyContent = `Hi Prachi,\n\n${trimmedMessage}\n\n---\nSender Name: ${trimmedName}\nSender Email: ${trimmedEmail || 'Not specified'}`;
+
+    const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyContent)}`;
+
+    // Cross-browser reliable mailto dispatch
+    try {
+      const link = document.createElement('a');
+      link.href = mailtoUrl;
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch {
+      window.location.href = mailtoUrl;
+    }
+
+    setStatusMessage('Opening your email client...');
   };
 
   return (
@@ -74,6 +99,7 @@ export const Contact: React.FC = () => {
                     <a
                       href={`mailto:${personalInfo.email}`}
                       className="text-sm sm:text-base font-display font-bold text-[#F5F3FF] hover:text-brand-lavender transition-colors"
+                      title="Click to compose email"
                     >
                       {personalInfo.email}
                     </a>
@@ -85,7 +111,7 @@ export const Contact: React.FC = () => {
                   className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/[0.05] hover:bg-purple-500/20 text-xs font-mono text-brand-soft border border-purple-500/20 transition-all self-start sm:self-auto hover:scale-105"
                   title="Copy email to clipboard"
                 >
-                  {copied ? (
+                  {copiedEmail ? (
                     <>
                       <Check className="w-3.5 h-3.5 text-brand-lavender" />
                       <span className="text-brand-lavender">Copied!</span>
@@ -146,7 +172,7 @@ export const Contact: React.FC = () => {
                   href={`mailto:${personalInfo.email}`}
                   className="btn-studio-primary px-8 py-4 inline-flex items-center gap-3 text-base shadow-[0_0_35px_rgba(139,92,246,0.45)]"
                 >
-                  <span>Send Direct Email</span>
+                  <span>Open Email Client</span>
                   <ArrowUpRight className="w-5 h-5" />
                 </a>
               </div>
@@ -172,7 +198,10 @@ export const Contact: React.FC = () => {
                       type="text"
                       required
                       value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                        setStatusMessage(null);
+                      }}
                       placeholder="e.g. Jordan Lee"
                       className="w-full px-4 py-3 rounded-2xl bg-[#090512]/90 border border-purple-500/20 text-sm text-[#F5F3FF] placeholder-ink-muted/50 focus:outline-none focus:border-brand-lavender transition-colors"
                     />
@@ -185,7 +214,10 @@ export const Contact: React.FC = () => {
                     <input
                       type="email"
                       value={senderEmail}
-                      onChange={(e) => setSenderEmail(e.target.value)}
+                      onChange={(e) => {
+                        setSenderEmail(e.target.value);
+                        setStatusMessage(null);
+                      }}
                       placeholder="jordan@company.com"
                       className="w-full px-4 py-3 rounded-2xl bg-[#090512]/90 border border-purple-500/20 text-sm text-[#F5F3FF] placeholder-ink-muted/50 focus:outline-none focus:border-brand-lavender transition-colors"
                     />
@@ -199,7 +231,10 @@ export const Contact: React.FC = () => {
                       required
                       rows={4}
                       value={message}
-                      onChange={(e) => setMessage(e.target.value)}
+                      onChange={(e) => {
+                        setMessage(e.target.value);
+                        setStatusMessage(null);
+                      }}
                       placeholder="Tell me about your product vision, full-stack opening, or collaboration idea..."
                       className="w-full px-4 py-3 rounded-2xl bg-[#090512]/90 border border-purple-500/20 text-sm text-[#F5F3FF] placeholder-ink-muted/50 focus:outline-none focus:border-brand-lavender transition-colors resize-none"
                     ></textarea>
@@ -207,16 +242,42 @@ export const Contact: React.FC = () => {
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-semibold text-sm transition-all shadow-[0_0_20px_rgba(139,92,246,0.35)]"
+                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-semibold text-sm transition-all shadow-[0_0_20px_rgba(139,92,246,0.35)] cursor-pointer"
                   >
                     <Send className="w-4 h-4" />
                     <span>Send a Message</span>
                   </button>
 
-                  {sentStatus && (
-                    <p className="text-xs text-brand-lavender text-center font-mono mt-2">
-                      {sentStatus}
-                    </p>
+                  {/* Fallback option to copy draft if no mail client configured */}
+                  {(name.trim() || message.trim()) && (
+                    <div className="pt-1 text-center">
+                      <button
+                        type="button"
+                        onClick={handleCopyDraft}
+                        className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-muted hover:text-brand-lavender transition-colors"
+                      >
+                        {copiedDraft ? (
+                          <>
+                            <Check className="w-3.5 h-3.5 text-brand-lavender" />
+                            <span className="text-brand-lavender">Draft Copied to Clipboard!</span>
+                          </>
+                        ) : (
+                          <>
+                            <FileText className="w-3.5 h-3.5" />
+                            <span>Copy message draft text</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
+
+                  {statusMessage && (
+                    <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-brand-lavender text-center font-mono">
+                      <p>{statusMessage}</p>
+                      <p className="text-[11px] text-ink-muted mt-1 font-sans">
+                        If your email app didn't open automatically, write directly to <a href={`mailto:${personalInfo.email}`} className="text-brand-lavender underline">{personalInfo.email}</a>.
+                      </p>
+                    </div>
                   )}
                 </form>
               </div>

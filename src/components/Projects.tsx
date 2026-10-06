@@ -44,7 +44,7 @@ export const Projects: React.FC = () => {
             </p>
           </div>
 
-          {/* Unique Rounded Purple Filter Pills */}
+          {/* Rounded Purple Filter Pills */}
           <div className="flex items-center flex-wrap gap-2 p-1.5 bg-[#140D22]/90 rounded-full border border-purple-500/20 backdrop-blur-xl self-start md:self-auto">
             {filterTabs.map((tab) => {
               const TabIcon = tab.icon;
@@ -60,7 +60,7 @@ export const Projects: React.FC = () => {
                 >
                   <TabIcon className="w-3.5 h-3.5" />
                   <span>{tab.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-semibold ${
                     filter === tab.key ? 'bg-white/20 text-white' : 'bg-purple-900/30 text-ink-muted'
                   }`}>
                     {tab.count}
@@ -71,15 +71,16 @@ export const Projects: React.FC = () => {
           </div>
         </div>
 
-        {/* Project Shelf Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8">
+        {/* Consistent 3-Column Project Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 items-stretch">
           {filteredProjects.map((project, idx) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={idx}
-              onSelect={setSelectedProject}
-            />
+            <div key={project.id} className="h-full">
+              <ProjectCard
+                project={project}
+                index={idx}
+                onSelect={setSelectedProject}
+              />
+            </div>
           ))}
         </div>
 

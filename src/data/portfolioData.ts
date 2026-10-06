@@ -146,6 +146,14 @@ export const achievementsData = [
     date: 'November 2023',
     description: 'Credentialed certification validating core Python programming, object-oriented concepts, data structures, and foundational scripting expertise.',
     icon: 'award'
+  },
+  {
+    id: 'scaler-cert',
+    type: 'Professional Certification',
+    title: 'Data Science Course — Mastering Fundamentals',
+    issuer: 'Scaler',
+    description: 'Comprehensive course mastering data science fundamentals, statistical reasoning, and data analysis concepts.',
+    icon: 'award'
   }
 ];
 
@@ -158,8 +166,7 @@ export const techStackData: TechCategory[] = [
       { name: 'JavaScript', highlight: true },
       { name: 'TypeScript', highlight: true },
       { name: 'Dart', highlight: true },
-      { name: 'SQL', highlight: false },
-      { name: 'C++', highlight: false }
+      { name: 'SQL', highlight: false }
     ]
   },
   {

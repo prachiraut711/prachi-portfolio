@@ -21,40 +21,14 @@ export interface Project {
 }
 
 export const projectsData: Project[] = [
-  // 01 — FULL-STACK WEB
-  {
-    id: 'signalflow',
-    name: 'SignalFlow',
-    subtitle: 'Business Event Intelligence & Anomaly Diagnostics',
-    category: 'full-stack',
-    domainNumber: '01',
-    domainLabel: 'Full-Stack Web',
-    description: 'A full-stack business event intelligence platform that ingests real-time application telemetry via Redis Streams, detects abnormal behavior using statistical models and Isolation Forest, correlates related anomalies into actionable incidents, and synthesizes AI-assisted operational explanations.',
-    problemSolution: {
-      problem: 'High-throughput microservices emit fragmented logs and metrics, making it difficult for on-call engineers to identify real root-cause incidents versus noisy transient spikes.',
-      solution: 'Streamlines telemetry into a Redis Streams pipeline, performs DuckDB analytical profiling, clusters co-occurring anomalies into unified incidents, and produces plain-language AI operational diagnostics.'
-    },
-    features: [
-      'Asynchronous telemetry event ingestion buffered through Redis Streams',
-      'Dual-layer anomaly detection using statistical moving averages and Isolation Forest',
-      'Automated signal correlation that groups related anomalies to reduce alert fatigue',
-      'AI operational incident explanations powered by OpenRouter API',
-      'Interactive React dashboard with live telemetry playback and metric graphs'
-    ],
-    techStack: ['Python', 'FastAPI', 'React', 'TypeScript', 'Redis Streams', 'DuckDB', 'PostgreSQL', 'Isolation Forest', 'Docker'],
-    githubUrl: 'https://github.com/prachiraut711/SignalFlow',
-    liveDemoUrl: 'https://signalflow-frontend.onrender.com/',
-    docsUrl: 'https://signalflow-backend-df3p.onrender.com/docs',
-    featured: true,
-    visualType: 'telemetry'
-  },
+  // 01 — FULL-STACK / FRONTEND
   {
     id: 'smartsupport-ai',
     name: 'SmartSupport AI',
     subtitle: 'AI-Assisted Customer Support & Ticket Triage Workspace',
     category: 'full-stack',
     domainNumber: '01',
-    domainLabel: 'Full-Stack Web',
+    domainLabel: 'Full-Stack / Frontend',
     description: 'An AI-assisted customer support and ticket management platform built with React, Node.js, and PostgreSQL. Enables customers to submit tickets while providing agents with an intelligent triage workspace powered by Google Gemini AI for automated sentiment analysis, classification, and suggested replies.',
     problemSolution: {
       problem: 'Support teams face backlogs of repetitive inquiries and struggle to prioritize urgent or dissatisfied customer tickets effectively.',
@@ -74,12 +48,36 @@ export const projectsData: Project[] = [
     visualType: 'support-ai'
   },
   {
+    id: 'devpulse-ai',
+    name: 'DevPulse AI',
+    subtitle: 'AI-Powered Engineering Operations & Velocity Telemetry',
+    category: 'full-stack',
+    domainNumber: '01',
+    domainLabel: 'Full-Stack / Frontend',
+    description: 'An engineering operations dashboard unifying GitHub activity, pull request velocity, issue status, and CI/CD workflow telemetry into a single operational interface with automated AI code reviews and developer productivity analytics.',
+    problemSolution: {
+      problem: 'Engineering leads lack high-level visibility across fragmented GitHub repositories, slow review cycles, and recurring build pipeline bottlenecks.',
+      solution: 'Aggregates PR lifecycle metrics, CI telemetry, and code velocity into a responsive React 19 dashboard backed by FastAPI and AI-powered risk assessment.'
+    },
+    features: [
+      'Centralized GitHub repository and pull request tracking across projects',
+      'CI/CD pipeline status monitoring with failure pattern detection',
+      'Automated AI-assisted PR code reviews and risk score estimation',
+      'Development velocity metrics, review turnaround times, and team activity analytics',
+      'Automated testing workflows with GitHub Actions and containerized Docker setup'
+    ],
+    techStack: ['FastAPI', 'Python', 'React 19', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Docker', 'GitHub Actions'],
+    githubUrl: 'https://github.com/prachiraut711/devpulse-ai',
+    featured: false,
+    visualType: 'dev-analytics'
+  },
+  {
     id: 'eventsphere',
     name: 'EventSphere',
     subtitle: 'Full-Stack Event Booking & Ticketing Management',
     category: 'full-stack',
     domainNumber: '01',
-    domainLabel: 'Full-Stack Web',
+    domainLabel: 'Full-Stack / Frontend',
     description: 'A full-stack event discovery and reservation platform built with React and Express. Features secure email OTP verification, dual role-based dashboards for attendees and organizers, real-time seat availability tracking, dynamic ticket registration, and automated email confirmation dispatch.',
     problemSolution: {
       problem: 'Event organizers need a reliable platform that prevents duplicate registrations, verifies user authenticity, and provides transparent attendee metrics.',
@@ -126,52 +124,30 @@ export const projectsData: Project[] = [
     visualType: 'data-quality'
   },
   {
-    id: 'devpulse-ai',
-    name: 'DevPulse AI',
-    subtitle: 'AI-Powered Engineering Operations & Velocity Telemetry',
+    id: 'signalflow',
+    name: 'SignalFlow',
+    subtitle: 'Business Event Intelligence & Anomaly Diagnostics',
     category: 'ai-ml',
     domainNumber: '02',
     domainLabel: 'AI / Data / ML',
-    description: 'An engineering operations dashboard unifying GitHub activity, pull request velocity, issue status, and CI/CD workflow telemetry into a single operational interface with automated AI code reviews and developer productivity analytics.',
+    description: 'A business event intelligence platform that ingests real-time application telemetry via Redis Streams, detects abnormal behavior using statistical models and Isolation Forest, correlates related anomalies into actionable incidents, and synthesizes AI-assisted operational explanations.',
     problemSolution: {
-      problem: 'Engineering leads lack high-level visibility across fragmented GitHub repositories, slow review cycles, and recurring build pipeline bottlenecks.',
-      solution: 'Aggregates PR lifecycle metrics, CI telemetry, and code velocity into a responsive React 19 dashboard backed by FastAPI and AI-powered risk assessment.'
+      problem: 'High-throughput microservices emit fragmented logs and metrics, making it difficult for on-call engineers to identify real root-cause incidents versus noisy transient spikes.',
+      solution: 'Streamlines telemetry into a Redis Streams pipeline, performs DuckDB analytical profiling, clusters co-occurring anomalies into unified incidents, and produces plain-language AI operational diagnostics.'
     },
     features: [
-      'Centralized GitHub repository and pull request tracking across projects',
-      'CI/CD pipeline status monitoring with failure pattern detection',
-      'Automated AI-assisted PR code reviews and risk score estimation',
-      'Development velocity metrics, review turnaround times, and team activity analytics',
-      'Automated testing workflows with GitHub Actions and containerized Docker setup'
+      'Asynchronous telemetry event ingestion buffered through Redis Streams',
+      'Dual-layer anomaly detection using statistical moving averages and Isolation Forest',
+      'Automated signal correlation that groups related anomalies to reduce alert fatigue',
+      'AI operational incident explanations powered by OpenRouter API',
+      'Interactive React dashboard with live telemetry playback and metric graphs'
     ],
-    techStack: ['FastAPI', 'Python', 'React 19', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Docker', 'GitHub Actions'],
-    githubUrl: 'https://github.com/prachiraut711/devpulse-ai',
-    featured: false,
-    visualType: 'dev-analytics'
-  },
-  {
-    id: 'spendwise-ai',
-    name: 'SpendWise AI',
-    subtitle: 'Smart Personal Expense Tracker with Gemini AI Analytics',
-    category: 'ai-ml',
-    domainNumber: '02',
-    domainLabel: 'AI / Data / ML',
-    description: 'A mobile expense management app built with Flutter and Firebase that leverages Google Gemini (gemini-3.5-flash-lite) through the Firebase AI Logic SDK to deliver privacy-preserving spending analysis, category visual breakdowns, and actionable budgeting recommendations.',
-    problemSolution: {
-      problem: 'Traditional expense trackers only record raw transactions without providing intelligent, proactive context on spending habits or savings opportunities.',
-      solution: 'Aggregates spending metrics on-device and queries Gemini securely via Firebase AI Logic to produce actionable budgeting advice without transmitting sensitive personal identity.'
-    },
-    features: [
-      'Daily expense tracking with categorized logs, receipt notes, and date filtering',
-      'Visual analytics dashboard with monthly summaries, category breakdowns, and weekly charts',
-      'Privacy-first AI spending insights powered by Gemini via Firebase AI Logic',
-      'Cloud Firestore database sync guarded by fine-grained security rules and Firebase App Check',
-      'Reactive mobile UI architecture using GetX state management controllers'
-    ],
-    techStack: ['Flutter', 'Dart', 'Firebase Firestore', 'Firebase Auth', 'GetX', 'Google Gemini AI', 'Firebase AI Logic', 'App Check'],
-    githubUrl: 'https://github.com/prachiraut711/spendwise-ai',
-    featured: false,
-    visualType: 'finance-ai'
+    techStack: ['Python', 'FastAPI', 'React', 'TypeScript', 'Redis Streams', 'DuckDB', 'PostgreSQL', 'Isolation Forest', 'Docker'],
+    githubUrl: 'https://github.com/prachiraut711/SignalFlow',
+    liveDemoUrl: 'https://signalflow-frontend.onrender.com/',
+    docsUrl: 'https://signalflow-backend-df3p.onrender.com/docs',
+    featured: true,
+    visualType: 'telemetry'
   },
   {
     id: 'accident-damage-detection',
@@ -201,6 +177,30 @@ export const projectsData: Project[] = [
 
   // 03 — MOBILE APPLICATIONS
   {
+    id: 'spendwise-ai',
+    name: 'SpendWise AI',
+    subtitle: 'Smart Personal Expense Tracker with Gemini AI Analytics',
+    category: 'mobile',
+    domainNumber: '03',
+    domainLabel: 'Mobile Applications',
+    description: 'A mobile expense management app built with Flutter and Firebase that leverages Google Gemini (gemini-3.5-flash-lite) through the Firebase AI Logic SDK to deliver privacy-preserving spending analysis, category visual breakdowns, and actionable budgeting recommendations.',
+    problemSolution: {
+      problem: 'Traditional expense trackers only record raw transactions without providing intelligent, proactive context on spending habits or savings opportunities.',
+      solution: 'Aggregates spending metrics on-device and queries Gemini securely via Firebase AI Logic to produce actionable budgeting advice without transmitting sensitive personal identity.'
+    },
+    features: [
+      'Daily expense tracking with categorized logs, receipt notes, and date filtering',
+      'Visual analytics dashboard with monthly summaries, category breakdowns, and weekly charts',
+      'Privacy-first AI spending insights powered by Gemini via Firebase AI Logic',
+      'Cloud Firestore database sync guarded by fine-grained security rules and Firebase App Check',
+      'Reactive mobile UI architecture using GetX state management controllers'
+    ],
+    techStack: ['Flutter', 'Dart', 'Firebase Firestore', 'Firebase Auth', 'GetX', 'Google Gemini AI', 'Firebase AI Logic', 'App Check'],
+    githubUrl: 'https://github.com/prachiraut711/spendwise-ai',
+    featured: true,
+    visualType: 'finance-ai'
+  },
+  {
     id: 'chatapp',
     name: 'We-Chat / ChatApp',
     subtitle: 'Cross-Platform Real-Time Messaging App with Flutter',
@@ -222,7 +222,7 @@ export const projectsData: Project[] = [
     techStack: ['Flutter', 'Dart', 'Firebase Auth', 'Cloud Firestore', 'Firebase Cloud Messaging', 'GetX', 'Google Sign-In'],
     githubUrl: 'https://github.com/prachiraut711/ChatApp',
     videoDemoUrl: 'https://www.youtube.com/watch?v=p-F_tupn7h4',
-    featured: true,
+    featured: false,
     visualType: 'chat-app'
   },
   {
