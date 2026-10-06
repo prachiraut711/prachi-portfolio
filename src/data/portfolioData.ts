@@ -47,6 +47,7 @@ export const personalInfo = {
   github: 'https://github.com/prachiraut711',
   linkedin: 'https://www.linkedin.com/in/prachi-raut-a3635b287/',
   leetcode: 'https://leetcode.com/u/prachi-raut_711/',
+  livePortfolio: 'https://prachi-portfolio-henna.vercel.app/',
 };
 
 export const highlightStats: HighlightStat[] = [
