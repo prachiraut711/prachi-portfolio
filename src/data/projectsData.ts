@@ -22,7 +22,7 @@ export interface Project {
 }
 
 export const projectsData: Project[] = [
-  // 01 — FULL-STACK / FRONTEND
+  // 1. SmartSupport AI
   {
     id: 'smartsupport-ai',
     name: 'SmartSupport AI',
@@ -48,59 +48,75 @@ export const projectsData: Project[] = [
     featured: true,
     visualType: 'support-ai'
   },
-  {
-    id: 'devpulse-ai',
-    name: 'DevPulse AI',
-    subtitle: 'AI-Powered Engineering Operations & Velocity Telemetry',
-    category: 'full-stack',
-    domainNumber: '01',
-    domainLabel: 'Full-Stack / Frontend',
-    description: 'An engineering operations dashboard unifying GitHub activity, pull request velocity, issue status, and CI/CD workflow telemetry into a single operational interface with automated AI code reviews and developer productivity analytics.',
-    problemSolution: {
-      problem: 'Engineering leads lack high-level visibility across fragmented GitHub repositories, slow review cycles, and recurring build pipeline bottlenecks.',
-      solution: 'Aggregates PR lifecycle metrics, CI telemetry, and code velocity into a responsive React 19 dashboard backed by FastAPI and AI-powered risk assessment.'
-    },
-    features: [
-      'Centralized GitHub repository and pull request tracking across projects',
-      'CI/CD pipeline status monitoring with failure pattern detection',
-      'Automated AI-assisted PR code reviews and risk score estimation',
-      'Development velocity metrics, review turnaround times, and team activity analytics',
-      'Automated testing workflows with GitHub Actions and containerized Docker setup'
-    ],
-    techStack: ['FastAPI', 'Python', 'React 19', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Docker', 'GitHub Actions'],
-    githubUrl: 'https://github.com/prachiraut711/devpulse-ai',
-    liveDemoUrl: 'https://devpulse-ai-frontend.onrender.com',
-    featured: false,
-    status: 'In Progress',
-    visualType: 'dev-analytics'
-  },
+
+  // 2. EventSphere
   {
     id: 'eventsphere',
     name: 'EventSphere',
-    subtitle: 'Full-Stack Event Booking & Ticketing Management',
+    subtitle: 'Full-Stack Event Discovery, Ticketing & Attendee Management',
     category: 'full-stack',
     domainNumber: '01',
     domainLabel: 'Full-Stack / Frontend',
-    description: 'A full-stack event discovery and reservation platform built with React and Express. Features secure email OTP verification, dual role-based dashboards for attendees and organizers, real-time seat availability tracking, dynamic ticket registration, and automated email confirmation dispatch.',
+    description: 'EventSphere is a full-stack event discovery, ticket reservation, and attendee management platform built with React, Node.js, Express, and MongoDB. It supports event discovery, real-time seat tracking, digital QR e-tickets, simulated checkout, booking cancellation, pending booking approvals, and an administrator dashboard.',
     problemSolution: {
-      problem: 'Event organizers need a reliable platform that prevents duplicate registrations, verifies user authenticity, and provides transparent attendee metrics.',
-      solution: 'Built a MongoDB-backed reservation engine with Nodemailer OTP email verification, role-guarded routes, and live ticket inventory controls.'
+      problem: 'Event organizers and attendees face fragmented reservation workflows, manual ticket verification bottlenecks, and cumbersome approval management for free and paid events.',
+      solution: 'Engineered a full-stack MERN booking architecture featuring real-time seat inventory, automated QR-coded digital e-tickets, simulated Card/UPI checkout, and dedicated administrative approval controls.'
     },
     features: [
-      'Email OTP verification & JWT session authentication for secure signups',
-      'Role-based dashboards for event attendees and administrative managers',
-      'Real-time seat availability calculation and instant booking confirmations',
-      'Automated confirmation email delivery with event passes via Nodemailer',
-      'Search, filter, and category discovery for community events'
+      'Event discovery, searching, filtering, and sorting',
+      'JWT authentication and role-protected routes',
+      'Free-event RSVPs and simulated Card/UPI checkout',
+      'Pending booking requests and administrator approval',
+      'Booking cancellation with seat restoration',
+      'QR-based digital tickets',
+      'Admin dashboard with event and booking management'
     ],
-    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS', 'JWT', 'Nodemailer', 'REST APIs'],
+    techStack: [
+      'React 19',
+      'Vite',
+      'Tailwind CSS',
+      'React Router v7',
+      'Axios',
+      'Node.js',
+      'Express 5',
+      'MongoDB',
+      'Mongoose',
+      'JWT',
+      'bcryptjs'
+    ],
     githubUrl: 'https://github.com/prachiraut711/Event-Booking-Web-App',
-    videoDemoUrl: 'https://www.youtube.com/watch?v=0TlHoaTM-II',
+    liveDemoUrl: 'https://event-booking-web-app-nine.vercel.app/',
     featured: false,
     visualType: 'event-booking'
   },
 
-  // 02 — AI / DATA / MACHINE LEARNING
+  // 3. SpendWise AI
+  {
+    id: 'spendwise-ai',
+    name: 'SpendWise AI',
+    subtitle: 'Smart Personal Expense Tracker with Gemini AI Analytics',
+    category: 'mobile',
+    domainNumber: '03',
+    domainLabel: 'Mobile Applications',
+    description: 'A mobile expense management app built with Flutter and Firebase that leverages Google Gemini (gemini-3.5-flash-lite) through the Firebase AI Logic SDK to deliver privacy-preserving spending analysis, category visual breakdowns, and actionable budgeting recommendations.',
+    problemSolution: {
+      problem: 'Traditional expense trackers only record raw transactions without providing intelligent, proactive context on spending habits or savings opportunities.',
+      solution: 'Aggregates spending metrics on-device and queries Gemini securely via Firebase AI Logic to produce actionable budgeting advice without transmitting sensitive personal identity.'
+    },
+    features: [
+      'Daily expense tracking with categorized logs, receipt notes, and date filtering',
+      'Visual analytics dashboard with monthly summaries, category breakdowns, and weekly charts',
+      'Privacy-first AI spending insights powered by Gemini via Firebase AI Logic',
+      'Cloud Firestore database sync guarded by fine-grained security rules and Firebase App Check',
+      'Reactive mobile UI architecture using GetX state management controllers'
+    ],
+    techStack: ['Flutter', 'Dart', 'Firebase Firestore', 'Firebase Auth', 'GetX', 'Google Gemini AI', 'Firebase AI Logic', 'App Check'],
+    githubUrl: 'https://github.com/prachiraut711/spendwise-ai',
+    featured: true,
+    visualType: 'finance-ai'
+  },
+
+  // 4. DataTrust
   {
     id: 'datatrust',
     name: 'DataTrust',
@@ -126,6 +142,8 @@ export const projectsData: Project[] = [
     featured: true,
     visualType: 'data-quality'
   },
+
+  // 5. SignalFlow
   {
     id: 'signalflow',
     name: 'SignalFlow',
@@ -152,6 +170,8 @@ export const projectsData: Project[] = [
     featured: true,
     visualType: 'telemetry'
   },
+
+  // 6. AI-Based Vehicle Damage Detection
   {
     id: 'accident-damage-detection',
     name: 'AI Vehicle Damage Detection',
@@ -178,31 +198,7 @@ export const projectsData: Project[] = [
     visualType: 'yolo-vision'
   },
 
-  // 03 — MOBILE APPLICATIONS
-  {
-    id: 'spendwise-ai',
-    name: 'SpendWise AI',
-    subtitle: 'Smart Personal Expense Tracker with Gemini AI Analytics',
-    category: 'mobile',
-    domainNumber: '03',
-    domainLabel: 'Mobile Applications',
-    description: 'A mobile expense management app built with Flutter and Firebase that leverages Google Gemini (gemini-3.5-flash-lite) through the Firebase AI Logic SDK to deliver privacy-preserving spending analysis, category visual breakdowns, and actionable budgeting recommendations.',
-    problemSolution: {
-      problem: 'Traditional expense trackers only record raw transactions without providing intelligent, proactive context on spending habits or savings opportunities.',
-      solution: 'Aggregates spending metrics on-device and queries Gemini securely via Firebase AI Logic to produce actionable budgeting advice without transmitting sensitive personal identity.'
-    },
-    features: [
-      'Daily expense tracking with categorized logs, receipt notes, and date filtering',
-      'Visual analytics dashboard with monthly summaries, category breakdowns, and weekly charts',
-      'Privacy-first AI spending insights powered by Gemini via Firebase AI Logic',
-      'Cloud Firestore database sync guarded by fine-grained security rules and Firebase App Check',
-      'Reactive mobile UI architecture using GetX state management controllers'
-    ],
-    techStack: ['Flutter', 'Dart', 'Firebase Firestore', 'Firebase Auth', 'GetX', 'Google Gemini AI', 'Firebase AI Logic', 'App Check'],
-    githubUrl: 'https://github.com/prachiraut711/spendwise-ai',
-    featured: true,
-    visualType: 'finance-ai'
-  },
+  // 7. ChatApp / We-Chat
   {
     id: 'chatapp',
     name: 'We-Chat / ChatApp',
@@ -228,6 +224,8 @@ export const projectsData: Project[] = [
     featured: false,
     visualType: 'chat-app'
   },
+
+  // 8. Personal Task Tracker / Mini TaskHub
   {
     id: 'personal-task-tracker',
     name: 'Mini TaskHub',
@@ -252,5 +250,33 @@ export const projectsData: Project[] = [
     videoDemoUrl: 'https://youtu.be/PDHEOVLlLrk',
     featured: false,
     visualType: 'task-tracker'
+  },
+
+  // 9. DevPulse AI
+  {
+    id: 'devpulse-ai',
+    name: 'DevPulse AI',
+    subtitle: 'AI-Powered Engineering Operations & Velocity Telemetry',
+    category: 'full-stack',
+    domainNumber: '01',
+    domainLabel: 'Full-Stack / Frontend',
+    description: 'An engineering operations dashboard unifying GitHub activity, pull request velocity, issue status, and CI/CD workflow telemetry into a single operational interface with automated AI code reviews and developer productivity analytics.',
+    problemSolution: {
+      problem: 'Engineering leads lack high-level visibility across fragmented GitHub repositories, slow review cycles, and recurring build pipeline bottlenecks.',
+      solution: 'Aggregates PR lifecycle metrics, CI telemetry, and code velocity into a responsive React 19 dashboard backed by FastAPI and AI-powered risk assessment.'
+    },
+    features: [
+      'Centralized GitHub repository and pull request tracking across projects',
+      'CI/CD pipeline status monitoring with failure pattern detection',
+      'Automated AI-assisted PR code reviews and risk score estimation',
+      'Development velocity metrics, review turnaround times, and team activity analytics',
+      'Automated testing workflows with GitHub Actions and containerized Docker setup'
+    ],
+    techStack: ['FastAPI', 'Python', 'React 19', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Docker', 'GitHub Actions'],
+    githubUrl: 'https://github.com/prachiraut711/devpulse-ai',
+    liveDemoUrl: 'https://devpulse-ai-frontend.onrender.com',
+    featured: false,
+    status: 'In Progress',
+    visualType: 'dev-analytics'
   }
 ];
